@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="richBlack">#00171F</color>
+    <color name="roseMadder">#E71D36</color>
+    <color name="ashGrey">#B3B3B3</color>
+    <color name="iceberg">#74B3CE</color>
+    <color name="arsenic">#40434E</color>
 </resources>

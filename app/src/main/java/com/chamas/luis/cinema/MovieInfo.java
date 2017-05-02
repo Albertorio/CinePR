@@ -1,13 +1,7 @@
 package com.chamas.luis.cinema;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.chamas.luis.cinema.Utility.JsonTask;
 import com.squareup.picasso.Picasso;
@@ -18,23 +12,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class MainActivity extends AppCompatActivity {
+import developer.shivam.library.CrescentoImageView;
 
-    ProgressDialog pd;
-    String txtJson;
+public class MovieInfo extends AppCompatActivity {
 
-    TextView movieInfo;
-    ImageView poster;
-    Button movieInfoButton;
+    CrescentoImageView crescentoImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_movie_info);
 
-        movieInfo = (TextView)findViewById(R.id.movieInfo);
-        poster = (ImageView)findViewById(R.id.poster);
-        movieInfoButton = (Button)findViewById(R.id.movieInfoButton);
+        crescentoImageView = (CrescentoImageView)findViewById(R.id.crescentoImageView);
 
         new JsonTask(this, new JsonTask.AsyncResponse() {
             @Override
@@ -54,24 +43,14 @@ public class MainActivity extends AppCompatActivity {
 
                     System.out.println(keylist.toString());
 
-                    movieInfo.setText(jsonObject.getJSONObject("aguadilla").getJSONObject(keylist.get(0)).getJSONObject(keylist.get(0)).toString());
+//                    movieInfo.setText(jsonObject.getJSONObject("aguadilla").getJSONObject(keylist.get(0)).getJSONObject(keylist.get(0)).toString());
                     String picUrl = jsonObject.getJSONObject("aguadilla").getJSONObject(keylist.get(0)).getJSONObject(keylist.get(0)).getString("img");
-                    Picasso.with(MainActivity.this).load(picUrl).into(poster);
+                    Picasso.with(MovieInfo.this).load(picUrl).into(crescentoImageView);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         }).execute("aguadilla");
-
-        movieInfoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MovieInfo.class);
-                startActivity(intent);
-            }
-        });
-
     }
-
 }
